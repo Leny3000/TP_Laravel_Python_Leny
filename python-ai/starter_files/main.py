@@ -2,12 +2,11 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
 import numpy as np
-from ml_model import SimplePredictor
+from starter_files.ml_model import SimplePredictor
 
 app = FastAPI(title="Service IA Python")
 
-# TODO: Initialiser le modèle ML
-# predictor = SimplePredictor()
+predictor = SimplePredictor()
 
 class PredictionRequest(BaseModel):
     features: List[float]
@@ -20,7 +19,6 @@ async def root():
 async def health():
     return {"status": "OK"}
 
-# TODO: Compléter l'endpoint de prédiction
 @app.post("/predict")
 async def predict(request: PredictionRequest):
     """
@@ -30,8 +28,7 @@ async def predict(request: PredictionRequest):
     3. Retourner le résultat en JSON
     """
     try:
-        # Utiliser predictor.predict(request.features)
-        # Retourner {"prediction": result, "confidence": score}
-        pass
+        result = predictor.predict(request.features)
+        return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
