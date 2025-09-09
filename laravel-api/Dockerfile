@@ -13,14 +13,7 @@ WORKDIR /var/www
 # Copie des fichiers
 COPY . /var/www
 
-# Installation Laravel si pas encore fait
-RUN if [ ! -f "composer.json" ]; then \
-        composer create-project laravel/laravel . "10.*" && \
-        php artisan key:generate; \
-    fi
 
-# Installation des dépendances
-RUN composer install --no-dev
 
 EXPOSE 8000
 
