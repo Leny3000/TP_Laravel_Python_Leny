@@ -1,0 +1,22 @@
+# Laravel
+/laravel-api/vendor/
+/laravel-api/node_modules/
+/laravel-api/storage/*.key
+/laravel-api/.env
+/laravel-api/.env.backup
+
+# Python
+/python-ai/__pycache__/
+/python-ai/*.pyc
+/python-ai/model.joblib
+
+# Docker
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
