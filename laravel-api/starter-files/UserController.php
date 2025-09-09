@@ -12,8 +12,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Retourner une liste d'utilisateurs factices
-        // Format JSON avec id, nom, email
+        // Retourne une liste d'utilisateurs factices
+        $users = [
+            ['id' => 1, 'name' => 'Alice', 'email' => 'alice@example.com'],
+            ['id' => 2, 'name' => 'Bob', 'email' => 'bob@example.com'],
+            ['id' => 3, 'name' => 'Charlie', 'email' => 'charlie@example.com'],
+        ];
+        return response()->json(['users' => $users]);
     }
 
     /**
@@ -21,8 +26,13 @@ class UserController extends Controller
      */
     public function predict(Request $request)
     {
-        // 1. Récupérer les données de la requête
-        // 2. Appeler le service Python (http://python-ai:8001/predict)
-        // 3. Retourner le résultat
+        try {
+            $response = Http::post('http://python-ai:8001/predict', $request->all());
+            return response()->json($response->json(), $response->status());
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Service indisponible'
+            ], 503);
+        }
     }
 }

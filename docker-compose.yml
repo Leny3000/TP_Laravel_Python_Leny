@@ -5,8 +5,8 @@ services:
     build: ./laravel-api
     ports:
       - "8000:8000"
-    volumes:
-      - ./laravel-api:/var/www
+  # volumes:
+  #   - ./laravel-api:/var/www
     networks:
       - app-net
 
